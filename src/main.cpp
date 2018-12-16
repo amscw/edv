@@ -8,7 +8,7 @@ extern "C" {
 #include "integer.hpp"
 #include "stopwatch.hpp"
 #include "io.hpp"
-
+#include "queue.hpp"
 
 // Sample pragmas to cope with warnings. Please note the related line at
 // the end of this function, used to pop the compiler diagnostics status.
@@ -25,6 +25,7 @@ extern "C" {
 
 
 static io_c io;
+static textQueue_c queue;
 
 const char *buf = "20000.122";	// q17
 
@@ -37,6 +38,8 @@ int main(void) {
 	n.FromCStr(buf, 17);
 	n.ToCStr(17, 3);
 	puts(n);
+
+	queue.PutItem('a');
 
 	// Infinite loop
 	while (1) {
