@@ -114,7 +114,7 @@ public:
 	 * - The data present on the I/O pin are sampled into the input data register every AHB clock cycle
 	 * - A read access to the input data register provides the I/O state
 	 */
-	void ConfigAsInput() noexcept
+	void ConfigAsInput() noexcept	// TODO: need implementation
 	{
 
 	}

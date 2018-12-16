@@ -9,6 +9,11 @@
 #define INTEGER_HPP_
 
 #include <cstdint>
+#include <cstring>
+
+/**
+ * fixed-point support
+ */
 
 class integer_basic
 {
@@ -207,6 +212,57 @@ public:
 			m_buf[1] = 0;
 			return 1;
 		}
+	}
+
+	/**
+	 * Convert c-string to integer
+	 */
+	std::uint32_t FromCStr(const char *str) noexcept
+	{
+		std::uint32_t value = 0;
+		for (const char* p = str; *p; p++)
+		{
+			// fast multiply by 10
+			value <<= 1;			// 2x
+			value += value << 2;	// 5x
+ 			value += (*p - '0');
+		}
+		m_number = value;
+		return value;
+	}
+
+	/**
+	 * Convert c-string to fixed point integer
+	 * WARNING! function changes the m_buf!
+	 * WARNING! size of str must be less or equal m_buf!
+	 */
+	std::uint32_t FromCStr(const char * str, std::uint32_t e) noexcept
+	{
+		const char *delim = ".,";
+		char *p1, *p2;
+
+		// parse string
+		std::strcpy(m_buf, str);
+		p1 = strtok(m_buf, delim);
+		p2 = strtok(NULL, delim);
+
+		// convert integer part
+		std::uint32_t value = FromCStr(p1);
+		value <<= e;
+
+		if (p2 != NULL)
+		{
+			// convert fractional part
+			std::uint64_t f = FromCStr(p2);
+			f <<= e;
+			int i = sizeof pow10Table/ sizeof *pow10Table - strlen(p2) - 1;
+			if (i < 0)
+				i = 0;
+			f /= static_cast<std::uint64_t>(pow10Table[i]);
+			value |= static_cast<std::uint32_t>(f);
+		}
+		m_number = value;
+		return value;
 	}
 
 private:

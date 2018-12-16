@@ -12,6 +12,12 @@ extern "C" {
 }
 
 #include "io.hpp"
+#include "stdio.h"
+
+const char *io_c::messages[] = {
+	"test: ",
+	"time elapsed, ms: ",
+};
 
 io_c::io_c() noexcept
 {
@@ -32,6 +38,12 @@ io_c::~io_c() noexcept
 	RCC->APB1ENR &= ~RCC_APB1ENR_USART2EN;
 }
 
+void io_c::PrintMsg(io_c::msg_t mt, uint_c param, std::uint8_t e)
+{
+	param.ToCStr(e, prec);
+	fputs(messages[static_cast<int>(mt)], stdout);
+	puts(param);
+}
 
 // ----------------------------------------------------------------------------
 // When using retargetted configurations, the standard write() system call,
