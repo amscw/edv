@@ -1,0 +1,12 @@
+Part			package 			quantity	is
+---------------------------------------------------------
+SiA440DJ-T1-GE3	PowerPAK® SC70-6L	1			Power N-MOSFET
+ZXMC3AMCTA							1			Complementary MOSFET pair
+BAS40-05T 							1			Dual, common cathode shottky diode
+BAV99T								1			2x series pn diodes
+SN74LVC1G34DRL						2			Single 32mA low power buffer
+SN74LV1T34							1			Low power level translator 3.3V to 5V
+SN74LV1T04							1			Low power level translator 3.3V to 5V inverted
+----------------------------------------------------------
+Исключены?
+BC848CDW1T1G	1			2x NPN

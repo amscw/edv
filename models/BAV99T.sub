@@ -1,0 +1,4 @@
+*SRC=BAV99T;DI_BAV99T;Diodes;Si;  85.0V  0.155A  4.00ns   Diodes Inc.
+Switching Diode - one element of device
+.MODEL DI_BAV99T D  ( IS=2.69n RS=0.271 BV=85.0 IBV=2.00u
++ CJO=1.99p  M=0.333 N=1.95 TT=5.76n )

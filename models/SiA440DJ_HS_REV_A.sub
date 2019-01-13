@@ -1,0 +1,38 @@
+********************************
+* Copyright:                   *
+* Vishay Intertechnology, Inc. *
+********************************
+*Mar 17, 2014
+*ECN S14-0479, Rev. A
+*File Name: SiA440DJ_HS.txt
+*This document is intended as a SPICE modeling guideline and does not
+*constitute a commercial product datasheet.  Designers should refer to the
+*appropriate datasheet of the same number for guaranteed specification
+*limits.
+.SUBCKT SiA440DJ D G S 
+M1 3 GX S S NMOS W= 1301301u L= 0.25u 
+M2 S GX S D PMOS W= 1301301u L= 0.21u 
+R1 D 3 1.990e-02 5.125e-03 7.079e-06 
+CGS GX S 4.271e-10 
+CGD GX D 1.167e-11 
+RG G GY 1 
+RTCV 100 S 1e6 1.680e-04 -1.279e-06 
+ETCV GX GY 100 200 1 
+ITCV S 100 1u 
+VTCV 200 S 1 
+DBD S D DBD 1301301u 
+**************************************************************** 
+.MODEL NMOS NMOS ( LEVEL = 3 TOX = 3e-8 
++ RS = 0 KP = 2.936e-05 NSUB = 1.063e+17
++ KAPPA = 1.0755e-02 NFS = 5.088e+10
++ LD = 0 IS = 0 TPG = 1 CAPOP = 12 ) 
+*************************************************************** 
+.MODEL PMOS PMOS ( LEVEL = 3 TOX = 3e-8 
++NSUB = 2.988e+16 IS = 0 TPG = -1 CAPOP = 12 ) 
+**************************************************************** 
+.MODEL DBD D ( 
++FC = 0.1 TT = 1.652e-08 TREF = 25 BV = 41 
++RS = 7.324e-03 N = 1.658e+00 IS = 8.104e-08 
++EG = 9.678e-01 XTI = 2.276e+00 TRS = 7.566e-04 
++CJO = 2.467e-10 VJ = 7.789e-01 M = 5.747e-01 ) 
+.ENDS 
